@@ -27,13 +27,17 @@ int main(){
 		}
 		cout<<endl;
 	}
-	fclose(stdin); fclose(stdout);
+	freopen("CON","r",stdin);
+	freopen("CON","w",stdout);
+	cin.clear(); cout.clear();
 	freopen("tmpuser.txt","r",stdin);
 	for(int i = 1;i<=usercnt;i++){
 		int a; string b; cin>>a>>b;
 		touid[b] = a;
 	}
-	fclose(stdin); fclose(stdout);
+	freopen("CON","r",stdin);
+	freopen("CON","w",stdout);
+	cin.clear(); cout.clear();
 	cout<<"请确认已去除 contest.csv 第一行和其他地方的数据类型和用户名空格(Y/N)"<<endl;
 	cin>>s; if(s != "Y") return 0;
 	cout<<endl;
@@ -45,15 +49,20 @@ int main(){
 			if(tmp[i] == ',') cout<<" ";
 			else cout<<tmp[i];
 		}
+		cout<<endl;
 	}
-	fclose(stdin); fclose(stdout);
+	freopen("CON","r",stdin);
+	freopen("CON","w",stdout);
+	cin.clear(); cout.clear();
 	freopen("tmpuid.txt","r",stdin);
 	freopen("contestuid.txt","w",stdout);
 	for(int i = 1;i<=contestcnt;i++){
 		string a; cin>>a;
 		cout<<touid[a]<<endl;
 	}
-	fclose(stdin); fclose(stdout);
+	freopen("CON","r",stdin);
+	freopen("CON","w",stdout);
+	cin.clear(); cout.clear();
 	cout<<"请输入四道题的名称"<<endl;
 	cin>>t1name; cout<<endl;
 	cin>>t2name; cout<<endl;
@@ -76,7 +85,9 @@ int main(){
 		cout<<"md"<<" "<<t4name<<endl;
 		cout<<"cd .."<<endl;
 	}
-	fclose(stdout);
+	freopen("CON","r",stdin);
+	freopen("CON","w",stdout);
+	cin.clear(); cout.clear();
 	cout<<"请运行 md.bat 新建选手文件夹(Y/N)"<<endl;
 	cin>>s; if(s != "Y") return 0;
 	freopen("stuinfo.csv","r",stdin);
@@ -87,8 +98,11 @@ int main(){
 			if(tmp[i] == ',') cout<<" ";
 			else cout<<tmp[i];
 		}
+		cout<<endl;
 	}
-	fclose(stdin); fclose(stdout);
+	freopen("CON","r",stdin);
+	freopen("CON","w",stdout);
+	cin.clear(); cout.clear();
 	freopen("tmpstuinfo.txt","r",stdin);
 	for(int i = 1;i<=usercnt;i++){
 		int id; string cla; string name;
@@ -96,21 +110,59 @@ int main(){
 		toschool[id] = cla;
 		toname[id] = name;
 	}
-	fclose(stdin);
+	freopen("CON","r",stdin);
+	freopen("CON","w",stdout);
+	cin.clear(); cout.clear();
 	freopen("contestuid.txt","r",stdin);
 	freopen("move.bat","w",stdout);
 	char codename[300];
 	for(int i = 1;i<=contestcnt;i++){
 		int id; cin>>id;
 		sprintf(out,"FJ-%.3d",i);
-		sprintf(codename,"U%d_P%d*******.cc.o2",id,t1id);
+		sprintf(codename,"U%d_P%d_R************************_S*@*.cc.normal",id,t1id);
 		cout<<"move "<<codename<<" "<<out<<"/"<<t1name<<endl;
-		printf(codename,"U%d_P%d*******.cc.o2",id,t2id);
+		sprintf(codename,"U%d_P%d_R************************_S*@*.cc.normal",id,t2id);
 		cout<<"move "<<codename<<" "<<out<<"/"<<t2name<<endl;
-		printf(codename,"U%d_P%d*******.cc.o2",id,t3id);
+		sprintf(codename,"U%d_P%d_R************************_S*@*.cc.normal",id,t3id);
 		cout<<"move "<<codename<<" "<<out<<"/"<<t3name<<endl;
-		printf(codename,"U%d_P%d*******.cc.o2",id,t4id);
+		sprintf(codename,"U%d_P%d_R************************_S*@*.cc.normal",id,t4id);
 		cout<<"move "<<codename<<" "<<out<<"/"<<t4name<<endl;
 	}
+	freopen("CON","r",stdin);
+	freopen("CON","w",stdout);
+	cin.clear(); cout.clear();
+	freopen("contestuid.txt","r",stdin);
+	freopen("namelist.csv","w",stdout);
+	for(int i = 1;i<=contestcnt;i++){
+		int uid; cin>>uid;
+		printf("FJ-%.3d",i);
+		cout<<",";
+		cout<<toname[uid]<<",";
+		cout<<toschool[uid]<<endl;
+	}
+	freopen("CON","r",stdin);
+	freopen("CON","w",stdout);
+	cin.clear(); cout.clear();
+	freopen("rename.bat","w",stdout);
+	for(int i = 1;i<=contestcnt;i++){
+		sprintf(out,"FJ-%.3d",i);
+		cout<<"cd "<<out<<endl;
+		cout<<"cd "<<t1name<<endl;
+		cout<<"ren *.* "<<t1name<<".cpp"<<endl;
+		cout<<"cd .."<<endl;
+		cout<<"cd "<<t2name<<endl;
+		cout<<"ren *.* "<<t2name<<".cpp"<<endl;
+		cout<<"cd .."<<endl;
+		cout<<"cd "<<t3name<<endl;
+		cout<<"ren *.* "<<t3name<<".cpp"<<endl;
+		cout<<"cd .."<<endl;
+		cout<<"cd "<<t4name<<endl;
+		cout<<"ren *.* "<<t4name<<".cpp"<<endl;
+		cout<<"cd .."<<endl;
+		cout<<"cd .."<<endl;
+	}
+	freopen("CON","r",stdin);
+	freopen("CON","w",stdout);
+	cin.clear(); cout.clear();
 	return 0;
 }
